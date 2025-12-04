@@ -5,15 +5,20 @@ import HomeNavigator from "./HomeNavigator";
 import ProfileScreen from "../screens/ProfileScreen";
 import HomeIcon from "../../assets/icons/HomeIcon";
 import ProfileIcon from "../../assets/icons/ProfileIcon"; // Corrected path
+import { useTheme } from "../context/ThemeContext";
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const { colors } = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarStyle: {
+          backgroundColor: colors.card,
+          borderTopColor: colors.border,
           paddingTop: 10, // Add padding at the top of the tab bar
           paddingBottom: useSafeAreaInsets().bottom, // Apply safe area inset to the bottom
           height: 60 + useSafeAreaInsets().bottom, // Adjust total height
@@ -26,8 +31,8 @@ const TabNavigator = () => {
           }
           return null; // Should not happen with defined routes
         },
-        tabBarActiveTintColor: "#fd2153",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.subtleText,
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true, // Hide tab bar when keyboard is open
       })}

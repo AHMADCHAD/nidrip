@@ -10,6 +10,7 @@ import {
 import Screen from "../components/Screen";
 import { Ionicons } from "@expo/vector-icons";
 import { useCart } from "../context/CartContext";
+import { useTheme } from "../context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
 
 const CartScreen = ({ navigation }) => {
@@ -22,19 +23,21 @@ const CartScreen = ({ navigation }) => {
   } = useCart();
   const shippingFee = cartSubtotal > 0 ? 5.0 : 0;
   const total = cartSubtotal + shippingFee;
+  const { colors } = useTheme();
+  const styles = getStyles(colors);
 
   return (
     <Screen isScrollable={false}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#333" />
+          <Ionicons name="arrow-back" size={24} color={colors.icon} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My Cart</Text>
         <View style={{ width: 24 }} />
       </View>
       {cartItems.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Ionicons name="cart-outline" size={80} color="#ccc" />
+          <Ionicons name="cart-outline" size={80} color={colors.subtleText} />
           <Text style={styles.emptyText}>Your cart is empty</Text>
         </View>
       ) : (
@@ -58,11 +61,11 @@ const CartScreen = ({ navigation }) => {
                 </View>
                 <View style={styles.quantityControl}>
                   <TouchableOpacity onPress={() => decreaseQuantity(item.id)}>
-                    <Ionicons name="remove-circle-outline" size={26} color="#888" />
+                    <Ionicons name="remove-circle-outline" size={26} color={colors.subtleText} />
                   </TouchableOpacity>
                   <Text style={styles.itemQuantity}>{item.quantity}</Text>
                   <TouchableOpacity onPress={() => addToCart(item)}>
-                    <Ionicons name="add-circle" size={26} color="#fd2153" />
+                    <Ionicons name="add-circle" size={26} color={colors.primary} />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -84,7 +87,7 @@ const CartScreen = ({ navigation }) => {
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("Payment")}>
               <LinearGradient
-                colors={["#fd2153", "#ff5733"]}
+                colors={colors.gradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.checkoutButton}
@@ -99,43 +102,44 @@ const CartScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (colors) => StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 15,
     paddingVertical: 10,
-    backgroundColor: "#fff",
+    backgroundColor: colors.header,
     borderBottomWidth: 1,
-    borderBottomColor: "#eee",
+    borderBottomColor: colors.border,
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: "bold",
+    color: colors.text,
   },
   emptyContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f8f9fa",
+    backgroundColor: colors.background,
   },
   emptyText: {
     marginTop: 20,
     fontSize: 18,
-    color: "#999",
+    color: colors.subtleText,
   },
   listContainer: {
     padding: 15,
   },
   cartItem: {
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: colors.card,
     padding: 12,
     borderRadius: 10,
     marginBottom: 10,
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
@@ -153,11 +157,11 @@ const styles = StyleSheet.create({
   itemName: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#333",
+    color: colors.text,
   },
   itemPrice: {
     fontSize: 14,
-    color: "#fd2153",
+    color: colors.price,
     fontWeight: "600",
     marginTop: 5,
   },
@@ -169,15 +173,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginHorizontal: 15,
+    color: colors.text,
   },
   summaryContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.card,
     padding: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderTopWidth: 1,
-    borderColor: "#eee",
-    shadowColor: "#000",
+    borderColor: colors.border,
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: -5 },
     shadowOpacity: 0.05,
     shadowRadius: 10,
@@ -190,18 +195,18 @@ const styles = StyleSheet.create({
   },
   summaryText: {
     fontSize: 16,
-    color: "#666",
+    color: colors.subtleText,
   },
   totalRow: {
     borderTopWidth: 1,
-    borderColor: "#eee",
+    borderColor: colors.border,
     paddingTop: 10,
     marginTop: 5,
   },
   totalText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#333",
+    color: colors.text,
   },
   checkoutButton: {
     padding: 18,

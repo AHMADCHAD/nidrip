@@ -9,6 +9,7 @@ import {
 import Screen from "../components/Screen";
 import { Ionicons } from "@expo/vector-icons";
 import { useCart } from "../context/CartContext";
+import { useTheme } from "../context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
 
 const PaymentScreen = ({ navigation }) => {
@@ -16,12 +17,14 @@ const PaymentScreen = ({ navigation }) => {
   const shippingFee = cartSubtotal > 0 ? 5.0 : 0;
   const total = cartSubtotal + shippingFee;
   const [selectedMethod, setSelectedMethod] = useState(null);
+  const { colors } = useTheme();
+  const styles = getStyles(colors);
 
   return (
     <Screen isScrollable={false}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="#333" />
+          <Ionicons name="arrow-back" size={24} color={colors.icon} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Checkout</Text>
         <View style={{ width: 24 }} />
@@ -59,7 +62,7 @@ const PaymentScreen = ({ navigation }) => {
             <Text style={styles.paymentMethodText}>Pay with PayPal</Text>
           </View>
           {selectedMethod === "paypal" && (
-            <Ionicons name="checkmark-circle" size={24} color="#fd2153" />
+            <Ionicons name="checkmark-circle" size={24} color={colors.primary} />
           )}
         </TouchableOpacity>
         <TouchableOpacity
@@ -74,13 +77,13 @@ const PaymentScreen = ({ navigation }) => {
             <Text style={styles.paymentMethodText}>Google Pay</Text>
           </View>
           {selectedMethod === "google" && (
-            <Ionicons name="checkmark-circle" size={24} color="#fd2153" />
+            <Ionicons name="checkmark-circle" size={24} color={colors.primary} />
           )}
         </TouchableOpacity>
 
         <TouchableOpacity>
           <LinearGradient
-            colors={["#fd2153", "#ff5733"]}
+            colors={colors.gradient}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={styles.payButton}
@@ -93,20 +96,21 @@ const PaymentScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (colors) => StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 15,
     paddingVertical: 10,
-    backgroundColor: "#fff",
+    backgroundColor: colors.header,
     borderBottomWidth: 1,
-    borderBottomColor: "#eee",
+    borderBottomColor: colors.border,
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: "bold",
+    color: colors.text,
   },
   container: {
     padding: 20,
@@ -115,12 +119,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#333",
+    color: colors.text,
     marginBottom: 15,
     marginTop: 10,
   },
   summaryBox: {
-    backgroundColor: "#f8f9fa",
+    backgroundColor: colors.card,
     borderRadius: 12,
     padding: 20,
     marginBottom: 20,
@@ -132,49 +136,49 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 16,
-    color: "#666",
+    color: colors.subtleText,
   },
   summaryValue: {
     fontSize: 16,
-    color: "#333",
+    color: colors.text,
     fontWeight: "500",
   },
   totalRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     borderTopWidth: 1,
-    borderTopColor: "#e5e5e5",
+    borderTopColor: colors.border,
     paddingTop: 12,
   },
   totalLabel: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#333",
+    color: colors.text,
   },
   totalValue: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#fd2153",
+    color: colors.primary,
   },
   paymentMethod: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: colors.card,
     borderRadius: 12,
     paddingVertical: 20,
     paddingHorizontal: 25,
     marginBottom: 15,
-    shadowColor: "#000",
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 10,
     elevation: 3,
     borderWidth: 1,
-    borderColor: "#f0f0f0",
+    borderColor: colors.border,
     justifyContent: "space-between",
   },
   selectedPaymentMethod: {
-    borderColor: "#fd2153",
+    borderColor: colors.primary,
     borderWidth: 1.5,
   },
   paymentMethodInfo: {
@@ -185,7 +189,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     marginLeft: 15,
-    color: "#333",
+    color: colors.text,
   },
   payButton: {
     padding: 18,

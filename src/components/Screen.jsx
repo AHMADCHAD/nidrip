@@ -1,13 +1,23 @@
 import React from "react";
-import { StyleSheet, View, ScrollView, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  StatusBar,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "../context/ThemeContext";
 
 function Screen({ children, style, isScrollable = true }) {
-  return ( 
-    <SafeAreaView style={[styles.screen, style]} edges={['top', 'left', 'right']}>
+  const { colors, isDarkMode } = useTheme();
+
+  const screenStyles = [styles.screen, { backgroundColor: colors.header }, style];
+
+  return (
+    <SafeAreaView style={screenStyles} edges={["top", "left", "right"]}>
       <StatusBar
-        backgroundColor="#FFFFFF"
-        barStyle="dark-content"
+        backgroundColor={colors.header}
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
         translucent={false}
       />
       {isScrollable ? (
@@ -19,7 +29,7 @@ function Screen({ children, style, isScrollable = true }) {
           {children}
         </ScrollView>
       ) : (
-        <View style={styles.view}>{children}</View>
+        <View style={[styles.view, { backgroundColor: colors.background }]}>{children}</View>
       )}
     </SafeAreaView>
   );
@@ -28,7 +38,6 @@ function Screen({ children, style, isScrollable = true }) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
   },
   scrollView: {
     flex: 1,
@@ -38,7 +47,6 @@ const styles = StyleSheet.create({
   },
   view: {
     flex: 1,
-    backgroundColor:'#FCFCFC'
   },
 });
 

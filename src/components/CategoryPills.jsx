@@ -6,8 +6,11 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import { useTheme } from "../context/ThemeContext";
 
 const CategoryPills = ({ categories, activeCategory, onSelectCategory }) => {
+  const { colors } = useTheme();
+  const styles = getStyles(colors);
   const renderPill = ({ item }) => {
     const isActive = item === activeCategory;
     return (
@@ -36,18 +39,18 @@ const CategoryPills = ({ categories, activeCategory, onSelectCategory }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (colors) => StyleSheet.create({
   container: {
     paddingVertical: 15,
-    backgroundColor: "#fff",
+    backgroundColor: colors.header,
     borderBottomWidth: 1,
-    borderBottomColor: "#eee",
+    borderBottomColor: colors.border,
   },
   listContainer: {
     paddingHorizontal: 15,
   },
   pill: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: colors.searchBg,
     paddingVertical: 8,
     paddingHorizontal: 20,
     borderRadius: 20,
@@ -56,15 +59,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   activePill: {
-    backgroundColor: "#fd2153",
+    backgroundColor: colors.primary,
   },
   pillText: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#333",
+    color: colors.text,
   },
   activePillText: {
-    color: "#fff",
+    color: colors.badgeText,
   },
 });
 
