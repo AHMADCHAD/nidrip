@@ -1,0 +1,204 @@
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import Screen from "../components/Screen";
+import { Ionicons } from "@expo/vector-icons";
+import { useCart } from "../context/CartContext";
+import { LinearGradient } from "expo-linear-gradient";
+
+const PaymentScreen = ({ navigation }) => {
+  const { cartSubtotal } = useCart();
+  const shippingFee = cartSubtotal > 0 ? 5.0 : 0;
+  const total = cartSubtotal + shippingFee;
+  const [selectedMethod, setSelectedMethod] = useState(null);
+
+  return (
+    <Screen isScrollable={false}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="#333" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Checkout</Text>
+        <View style={{ width: 24 }} />
+      </View>
+      <ScrollView
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.sectionTitle}>Order Summary</Text>
+        <View style={styles.summaryBox}>
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>Subtotal</Text>
+            <Text style={styles.summaryValue}>€{cartSubtotal.toFixed(2)}</Text>
+          </View>
+          <View style={styles.summaryRow}>
+            <Text style={styles.summaryLabel}>Shipping</Text>
+            <Text style={styles.summaryValue}>€{shippingFee.toFixed(2)}</Text>
+          </View>
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>Total</Text>
+            <Text style={styles.totalValue}>€{total.toFixed(2)}</Text>
+          </View>
+        </View>
+
+        <Text style={styles.sectionTitle}>Payment Method</Text>
+        <TouchableOpacity
+          style={[
+            styles.paymentMethod,
+            selectedMethod === "paypal" && styles.selectedPaymentMethod,
+          ]}
+          onPress={() => setSelectedMethod("paypal")}
+        >
+          <View style={styles.paymentMethodInfo}>
+            <Ionicons name="logo-paypal" size={30} color="#003087" />
+            <Text style={styles.paymentMethodText}>Pay with PayPal</Text>
+          </View>
+          {selectedMethod === "paypal" && (
+            <Ionicons name="checkmark-circle" size={24} color="#fd2153" />
+          )}
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.paymentMethod,
+            selectedMethod === "google" && styles.selectedPaymentMethod,
+          ]}
+          onPress={() => setSelectedMethod("google")}
+        >
+          <View style={styles.paymentMethodInfo}>
+            <Ionicons name="logo-google" size={30} color="#DB4437" />
+            <Text style={styles.paymentMethodText}>Google Pay</Text>
+          </View>
+          {selectedMethod === "google" && (
+            <Ionicons name="checkmark-circle" size={24} color="#fd2153" />
+          )}
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <LinearGradient
+            colors={["#fd2153", "#ff5733"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.payButton}
+          >
+            <Text style={styles.payButtonText}>Pay €{total.toFixed(2)}</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </ScrollView>
+    </Screen>
+  );
+};
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    backgroundColor: "#fff",
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  container: {
+    padding: 20,
+    paddingBottom: 40,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 15,
+    marginTop: 10,
+  },
+  summaryBox: {
+    backgroundColor: "#f8f9fa",
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 20,
+  },
+  summaryRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 12,
+  },
+  summaryLabel: {
+    fontSize: 16,
+    color: "#666",
+  },
+  summaryValue: {
+    fontSize: 16,
+    color: "#333",
+    fontWeight: "500",
+  },
+  totalRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderTopWidth: 1,
+    borderTopColor: "#e5e5e5",
+    paddingTop: 12,
+  },
+  totalLabel: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  totalValue: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fd2153",
+  },
+  paymentMethod: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    paddingVertical: 20,
+    paddingHorizontal: 25,
+    marginBottom: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: "#f0f0f0",
+    justifyContent: "space-between",
+  },
+  selectedPaymentMethod: {
+    borderColor: "#fd2153",
+    borderWidth: 1.5,
+  },
+  paymentMethodInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  paymentMethodText: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginLeft: 15,
+    color: "#333",
+  },
+  payButton: {
+    padding: 18,
+    borderRadius: 30,
+    alignItems: "center",
+    marginTop: 30,
+  },
+  payButtonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+});
+
+export default PaymentScreen;
+          
