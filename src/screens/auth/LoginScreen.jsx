@@ -10,7 +10,9 @@ import Screen from "../../components/Screen";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../../context/ThemeContext";
 import { useAuth } from "../../context/UserContext";
-import { LinearGradient } from "expo-linear-gradient";
+import fonts from "../../theme/fonts";
+import { signInWithEmail, signInWithGoogle } from "../../firebase/AuthService";
+import NidripButton from "../../components/NidripButton";
 
 const LoginScreen = ({ navigation }) => {
   const { colors } = useTheme();
@@ -19,19 +21,32 @@ const LoginScreen = ({ navigation }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    // Dummy login: In a real app, you'd validate credentials against a server
-    console.log("Attempting login with:", email, password);
-    const dummyUser = { name: "John Doe", email: email };
-    login(dummyUser);
+  const handleLogin = async () => {
+    setLoading(true);
+    setError("");
+    const { user, error } = await signInWithEmail(email, password);
+    if (error) {
+      setError(error.message);
+    } else {
+      // The onAuthStateChanged listener will handle navigation,
+      // but we can update the context here.
+      login(user);
+    }
+    setLoading(false);
   };
 
-  const handleGoogleLogin = () => {
-    // Implement Google Sign-In logic here
-    console.log("Logging in with Google");
-    // On successful Google login, navigate to the main app
-    // navigation.navigate("MainApp"); // Example navigation
+  const handleGoogleLogin = async () => {
+    setError("");
+    const { user, error } = await signInWithGoogle();
+    if (error) {
+      setError(error.message);
+    } else {
+      login(user);
+    }
+    setLoading(false);
   };
 
   return (
@@ -65,16 +80,9 @@ const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={handleLogin}>
-          <LinearGradient
-            colors={colors.gradient}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.authButton}
-          >
-            <Text style={styles.authButtonText}>Login</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+        {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+        <NidripButton title="Login" onPress={handleLogin} loading={loading} />
 
         <View style={styles.separatorContainer}>
           <View style={styles.separatorLine} />
@@ -111,12 +119,13 @@ const getStyles = (colors) =>
     },
     welcomeText: {
       fontSize: 32,
-      fontWeight: "bold",
+      fontFamily: fonts.bold,
       color: colors.text,
       marginBottom: 10,
     },
     subText: {
       fontSize: 16,
+      fontFamily: fonts.medium,
       color: colors.subtleText,
       textAlign: "center",
     },
@@ -130,6 +139,7 @@ const getStyles = (colors) =>
       paddingHorizontal: 15,
       paddingVertical: 12,
       fontSize: 16,
+      fontFamily: fonts.medium,
       color: colors.text,
       marginBottom: 15,
       borderWidth: 1,
@@ -141,7 +151,7 @@ const getStyles = (colors) =>
     forgotPasswordText: {
       color: colors.primary,
       fontSize: 14,
-      fontWeight: "600",
+      fontFamily: fonts.semiBold,
     },
     authButton: {
       width: "100%",
@@ -152,7 +162,7 @@ const getStyles = (colors) =>
     authButtonText: {
       color: "#fff",
       fontSize: 18,
-      fontWeight: "bold",
+      fontFamily: fonts.bold,
     },
     separatorContainer: {
       flexDirection: "row",
@@ -168,6 +178,7 @@ const getStyles = (colors) =>
     separatorText: {
       marginHorizontal: 10,
       color: colors.subtleText,
+      fontFamily: fonts.medium,
       fontSize: 14,
     },
     googleButton: {
@@ -184,7 +195,7 @@ const getStyles = (colors) =>
     googleButtonText: {
       marginLeft: 10,
       fontSize: 16,
-      fontWeight: "bold",
+      fontFamily: fonts.bold,
       color: colors.text,
     },
     signUpPrompt: {
@@ -194,12 +205,19 @@ const getStyles = (colors) =>
     },
     signUpPromptText: {
       fontSize: 14,
+      fontFamily: fonts.medium,
       color: colors.subtleText,
     },
     signUpLink: {
       fontSize: 14,
-      fontWeight: "bold",
+      fontFamily: fonts.bold,
       color: colors.primary,
+    },
+    errorText: {
+      color: "red",
+      textAlign: "center",
+      marginBottom: 10,
+      fontFamily: fonts.medium,
     },
   });
 

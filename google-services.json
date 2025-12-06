@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "292568378306",
+    "project_id": "nidrip",
+    "storage_bucket": "nidrip.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292568378306:android:ee7172727fca0f8aa0845b",
+        "android_client_info": {
+          "package_name": "com.nidrip.electronics"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1L9N5Yfp9QxmakhdV29CE9tNYon-DCMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

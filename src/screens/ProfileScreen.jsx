@@ -1,19 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Switch } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import Screen from "../components/Screen";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemeContext";
 import { useAuth } from "../context/UserContext";
+import fonts from "../theme/fonts";
 
 const ProfileScreen = ({ navigation }) => {
-  const { colors, isDarkMode, toggleTheme } = useTheme();
+  const { colors } = useTheme();
   const { user, logout } = useAuth();
   const styles = getStyles(colors);
+
+  console.log('here is the user', user)
 
   return (
     <Screen>
       <View style={styles.header}>
+        <View style={styles.headerIcon} />
         <Text style={styles.headerTitle}>Profile</Text>
+        <View style={styles.headerIcon} />
       </View>
       <View style={styles.container}>
         <Ionicons
@@ -21,18 +26,7 @@ const ProfileScreen = ({ navigation }) => {
           size={100}
           color={colors.subtleText}
         />
-        <Text style={styles.userName}>{user?.name || "Guest"}</Text>
-
-        <View style={styles.themeToggleContainer}>
-          <Text style={styles.themeToggleText}>Dark Mode</Text>
-          <Switch
-            trackColor={{ false: "#767577", true: colors.primary }}
-            thumbColor={isDarkMode ? "#f4f3f4" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleTheme}
-            value={isDarkMode}
-          />
-        </View>
+        <Text style={styles.userName}>{user?.displayName || "Guest"}</Text>
 
         <TouchableOpacity style={styles.logoutButton} onPress={logout}>
           <Text style={styles.logoutButtonText}>Logout</Text>
@@ -44,16 +38,21 @@ const ProfileScreen = ({ navigation }) => {
 
 const getStyles = (colors) => StyleSheet.create({
   header: {
-    padding: 15,
-    backgroundColor: colors.header,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 22,
+    fontFamily: fonts.bold,
+    textAlign: 'center',
+    flex: 1,
     color: colors.text,
+  },
+  headerIcon: {
+    width: 40,
   },
   container: {
     flex: 1,
@@ -64,25 +63,11 @@ const getStyles = (colors) => StyleSheet.create({
   userName: {
     marginTop: 20,
     fontSize: 22,
-    fontWeight: "bold",
-    color: colors.text,
-  },
-  themeToggleContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: colors.card,
-    borderRadius: 10,
-    padding: 15,
-    marginTop: 40,
-    width: '100%',
-  },
-  themeToggleText: {
-    fontSize: 16,
+    fontFamily: fonts.bold,
     color: colors.text,
   },
   logoutButton: {
-    marginTop: 20,
+    marginTop: 40,
     backgroundColor: colors.card,
     borderRadius: 10,
     padding: 15,
@@ -94,7 +79,7 @@ const getStyles = (colors) => StyleSheet.create({
   logoutButtonText: {
     fontSize: 16,
     color: 'red',
-    fontWeight: '600',
+    fontFamily: fonts.semiBold,
   },
 });
 

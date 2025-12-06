@@ -1,17 +1,29 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { onAuthStateChanged, signOut } from "../firebase/AuthService";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // In a real app, you'd fetch user data from a server or async storage
+  useEffect(() => {
+    // onAuthStateChanged returns an unsubscriber
+    const unsubscribe = onAuthStateChanged((authUser) => {
+      setUser(authUser);
+    });
+
+    // Unsubscribe to the listener when the component unmounts
+    return () => unsubscribe();
+  }, []);
+
+  // This function is still useful for optimistic UI updates if needed,
+  // but onAuthStateChanged is the source of truth.
   const login = (userData) => {
     setUser(userData);
   };
 
   const logout = () => {
-    setUser(null);
+    signOut(); // Call the signOut function from AuthService
   };
 
   return (

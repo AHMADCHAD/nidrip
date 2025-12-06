@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useCart } from "../context/CartContext";
 import { useTheme } from "../context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
+import fonts from "../theme/fonts";
 
 const PaymentScreen = ({ navigation }) => {
   const { cartSubtotal } = useCart();
@@ -23,11 +24,11 @@ const PaymentScreen = ({ navigation }) => {
   return (
     <Screen isScrollable={false}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color={colors.icon} />
+        <TouchableOpacity style={styles.headerIcon} onPress={() => navigation.goBack()}>
+          <Ionicons name="chevron-back" size={26} color={colors.icon} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Checkout</Text>
-        <View style={{ width: 24 }} />
+        <View style={styles.headerIcon} />
       </View>
       <ScrollView
         contentContainerStyle={styles.container}
@@ -100,17 +101,20 @@ const getStyles = (colors) => StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     paddingHorizontal: 15,
-    paddingVertical: 10,
-    backgroundColor: colors.header,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    paddingVertical: 10
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 22,
+    fontFamily: fonts.bold,
+    textAlign: 'center',
+    flex: 1,
     color: colors.text,
+  },
+  headerIcon: {
+    width: 40,
+    alignItems: 'flex-start'
   },
   container: {
     padding: 20,
@@ -118,7 +122,7 @@ const getStyles = (colors) => StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: fonts.semiBold,
     color: colors.text,
     marginBottom: 15,
     marginTop: 10,
@@ -136,12 +140,13 @@ const getStyles = (colors) => StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 16,
+    fontFamily: fonts.medium,
     color: colors.subtleText,
   },
   summaryValue: {
     fontSize: 16,
     color: colors.text,
-    fontWeight: "500",
+    fontFamily: fonts.medium,
   },
   totalRow: {
     flexDirection: "row",
@@ -152,18 +157,18 @@ const getStyles = (colors) => StyleSheet.create({
   },
   totalLabel: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: fonts.bold,
     color: colors.text,
   },
   totalValue: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: fonts.bold,
     color: colors.primary,
   },
   paymentMethod: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.card,
+    backgroundColor: colors.backgroundColor,
     borderRadius: 12,
     paddingVertical: 20,
     paddingHorizontal: 25,
@@ -187,7 +192,7 @@ const getStyles = (colors) => StyleSheet.create({
   },
   paymentMethodText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontFamily: fonts.semiBold,
     marginLeft: 15,
     color: colors.text,
   },
@@ -200,7 +205,7 @@ const getStyles = (colors) => StyleSheet.create({
   payButtonText: {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: fonts.bold,
   },
 });
 

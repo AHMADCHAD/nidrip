@@ -12,6 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useCart } from "../context/CartContext";
 import { useTheme } from "../context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
+import fonts from "../theme/fonts";
 
 const CartScreen = ({ navigation }) => {
   const {
@@ -29,11 +30,13 @@ const CartScreen = ({ navigation }) => {
   return (
     <Screen isScrollable={false}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color={colors.icon} />
+        <TouchableOpacity style={styles.headerIcon} onPress={() => navigation.goBack()}>
+          <Ionicons name="chevron-back" size={26} color={colors.icon} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>My Cart</Text>
-        <View style={{ width: 24 }} />
+        <Text style={styles.headerTitle}>
+          My Cart ({cartItems.reduce((sum, item) => sum + item.quantity, 0)})
+        </Text>
+        <View style={styles.headerIcon} />
       </View>
       {cartItems.length === 0 ? (
         <View style={styles.emptyContainer}>
@@ -106,17 +109,20 @@ const getStyles = (colors) => StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center", // Center the title
     paddingHorizontal: 15,
-    paddingVertical: 10,
-    backgroundColor: colors.header,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    paddingVertical: 10
   },
   headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 22,
+    fontFamily: fonts.bold,
     color: colors.text,
+    textAlign: 'center',
+    flex: 1,
+  },
+  headerIcon: {
+    width: 40,
+    alignItems: 'flex-start'
   },
   emptyContainer: {
     flex: 1,
@@ -127,6 +133,7 @@ const getStyles = (colors) => StyleSheet.create({
   emptyText: {
     marginTop: 20,
     fontSize: 18,
+    fontFamily: fonts.medium,
     color: colors.subtleText,
   },
   listContainer: {
@@ -134,7 +141,7 @@ const getStyles = (colors) => StyleSheet.create({
   },
   cartItem: {
     flexDirection: "row",
-    backgroundColor: colors.card,
+    backgroundColor: colors.cartCardBg,
     padding: 12,
     borderRadius: 10,
     marginBottom: 10,
@@ -156,13 +163,13 @@ const getStyles = (colors) => StyleSheet.create({
   },
   itemName: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: fonts.semiBold,
     color: colors.text,
   },
   itemPrice: {
     fontSize: 14,
     color: colors.price,
-    fontWeight: "600",
+    fontFamily: fonts.semiBold,
     marginTop: 5,
   },
   quantityControl: {
@@ -171,7 +178,7 @@ const getStyles = (colors) => StyleSheet.create({
   },
   itemQuantity: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: fonts.bold,
     marginHorizontal: 15,
     color: colors.text,
   },
@@ -195,6 +202,7 @@ const getStyles = (colors) => StyleSheet.create({
   },
   summaryText: {
     fontSize: 16,
+    fontFamily: fonts.medium,
     color: colors.subtleText,
   },
   totalRow: {
@@ -205,7 +213,7 @@ const getStyles = (colors) => StyleSheet.create({
   },
   totalText: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: fonts.bold,
     color: colors.text,
   },
   checkoutButton: {
@@ -217,7 +225,7 @@ const getStyles = (colors) => StyleSheet.create({
   checkoutButtonText: {
     color: "#fff",
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: fonts.bold,
   },
 });
 

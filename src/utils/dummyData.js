@@ -1,23 +1,46 @@
 export const CATEGORIES = [
-  { name: 'Refrigerators', icon: 'snow', color: '#e91e63' }, // Pink/Red
-  { name: 'Dishwashers', icon: 'disc', color: '#9c27b0' }, // Purple
-  { name: 'Ovens', icon: 'flame', color: '#4CAF50' }, // Green
-  { name: 'Washing Machines', icon: 'water', color: '#2196F3' }, // Blue
+  {
+    name: "Refrigerators",
+    icon: "snowflake",
+    color: "#e91e63",
+    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_8-300x300.jpg',
+  },
+  {
+    name: "Dishwashers",
+    icon: "disc",
+    color: "#9c27b0",
+    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_6-1-300x300.jpg',
+  },
+  {
+    name: "Ovens",
+    icon: "flame",
+    color: "#4CAF50",
+    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_7-300x300.jpg',
+  },
+  {
+    name: "Washing Machines",
+    icon: "water",
+    color: "#2196F3",
+    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+  },
 ];
 
 export const PRODUCTS = [
   {
     id: '1',
     name: 'Smart Fridge Pro',
+    brand: 'Orient',
     category: 'Refrigerators',
     price: 1200,
     rating: 4.8,
     reviewCount: 132,
+    discountPercentage: 25,
     image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
   },
   {
     id: '2',
     name: 'EcoClean Dishwasher',
+    brand: 'Dawlance',
     category: 'Dishwashers',
     price: 800,
     rating: 4.6,
@@ -27,6 +50,7 @@ export const PRODUCTS = [
   {
     id: '3',
     name: 'ChefMaster Oven',
+    brand: 'LG',
     category: 'Ovens',
     price: 950,
     rating: 4.9,
@@ -36,15 +60,18 @@ export const PRODUCTS = [
   {
     id: '4',
     name: 'UltraWash 5000',
+    brand: 'Samsung',
     category: 'Washing Machines',
     price: 750,
     rating: 4.7,
     reviewCount: 154,
+    discountPercentage: 15,
     image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
   },
   {
     id: '5',
     name: 'Compact Cooler',
+    brand: 'Orient',
     category: 'Refrigerators',
     price: 600,
     rating: 4.5,
@@ -54,6 +81,7 @@ export const PRODUCTS = [
   {
     id: '6',
     name: 'QuickWash Dishwasher',
+    brand: 'Dawlance',
     category: 'Dishwashers',
     price: 650,
     rating: 4.4,
@@ -63,15 +91,18 @@ export const PRODUCTS = [
   {
     id: '7',
     name: 'ProBake Convection Oven',
+    brand: 'LG',
     category: 'Ovens',
     price: 1100,
     rating: 4.9,
     reviewCount: 198,
+    discountPercentage: 10,
     image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
   },
   {
     id: '8',
     name: 'Family-Size Washer',
+    brand: 'Samsung',
     category: 'Washing Machines',
     price: 850,
     rating: 4.6,
@@ -81,6 +112,7 @@ export const PRODUCTS = [
   {
     id: '9',
     name: 'Beverage Cooler',
+    brand: 'Orient',
     category: 'Refrigerators',
     price: 450,
     rating: 4.7,
@@ -90,6 +122,7 @@ export const PRODUCTS = [
   {
     id: '10',
     name: 'Countertop Dishwasher',
+    brand: 'Dawlance',
     category: 'Dishwashers',
     price: 400,
     rating: 4.3,

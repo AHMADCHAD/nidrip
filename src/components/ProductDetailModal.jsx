@@ -11,6 +11,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "../context/ThemeContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import fonts from "../theme/fonts";
 
 const ProductDetailModal = ({
   visible,
@@ -140,7 +141,7 @@ const getStyles = (colors) =>
     },
     productName: {
       fontSize: 24,
-      fontWeight: "bold",
+      fontFamily: fonts.bold,
       color: colors.text,
       marginBottom: 8,
     },
@@ -152,11 +153,13 @@ const getStyles = (colors) =>
     productRatingText: {
       marginLeft: 8,
       fontSize: 14,
+      fontFamily: fonts.medium,
       color: colors.subtleText,
     },
     productDescription: {
       fontSize: 16,
       color: colors.text,
+      fontFamily: fonts.medium,
       lineHeight: 24,
     },
     footer: {
@@ -170,7 +173,7 @@ const getStyles = (colors) =>
     },
     productPrice: {
       fontSize: 28,
-      fontWeight: "bold",
+      fontFamily: fonts.bold,
       color: colors.primary,
     },
     addToCartButton: {
@@ -181,7 +184,7 @@ const getStyles = (colors) =>
     addToCartButtonText: {
       color: "#fff",
       fontSize: 16,
-      fontWeight: "bold",
+      fontFamily: fonts.bold,
     },
   });
 

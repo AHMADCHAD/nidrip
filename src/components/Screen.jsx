@@ -11,7 +11,7 @@ import { useTheme } from "../context/ThemeContext";
 function Screen({ children, style, isScrollable = true }) {
   const { colors, isDarkMode } = useTheme();
 
-  const screenStyles = [styles.screen, { backgroundColor: colors.header }, style];
+  const screenStyles = [styles.screen, { backgroundColor: colors.background }, style];
 
   return (
     <SafeAreaView style={screenStyles} edges={["top", "left", "right"]}>
@@ -44,6 +44,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flexGrow: 1,
+    // flexGrow: 1, // This was causing the nested FlatList rendering issue
+    // This property was causing the nested FlatList rendering issue and has been removed.
   },
   view: {
     flex: 1,
