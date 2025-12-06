@@ -1,12 +1,30 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../context/ThemeContext';
 import fonts from '../theme/fonts';
+import SkeletonPlaceholder from './SkeletonPlaceholder';
 
 const ProductCard = ({ product, onPress, onAddToCart, isInCart }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+  const imageOpacity = useState(new Animated.Value(0))[0];
+
+  const onImageLoad = () => {
+    // setImageLoading(false);
+    Animated.timing(imageOpacity, {
+      toValue: 1,
+      duration: 400,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const onImageError = () => {
+    setImageLoading(false);
+    setImageError(true);
+  };
 
   return (
     <TouchableOpacity
@@ -21,10 +39,24 @@ const ProductCard = ({ product, onPress, onAddToCart, isInCart }) => {
           </Text>
         </View>
       )}
-      <Image
-        source={{ uri: product.image }}
-        style={styles.productImage}
-      />
+      <View style={styles.imageContainer}>
+        {imageLoading && !imageError && <SkeletonPlaceholder style={styles.productImage} />}
+        {imageError ? (
+          <View style={styles.errorContainer}>
+            <Ionicons name="image-outline" size={40} color={colors.subtleText} />
+          </View>
+        ) : (
+          <Animated.Image
+            source={{ uri: product.image }}
+            style={[
+              styles.productImage,
+              { opacity: imageOpacity, position: 'absolute' },
+            ]}
+            onLoad={onImageLoad}
+            onError={onImageError}
+          />
+        )}
+      </View>
       <View style={styles.productInfoContainer}>
         <Text style={styles.productName} numberOfLines={2}>
           {product.name}
@@ -68,6 +100,19 @@ const getStyles = (colors) => StyleSheet.create({
   },
   productInfoContainer: {
     padding: 12,
+  },
+  imageContainer: {
+    width: '100%',
+    height: 140,
+  },
+  errorContainer: {
+    width: '100%',
+    height: 140,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.border,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   productImage: {
     width: "100%",

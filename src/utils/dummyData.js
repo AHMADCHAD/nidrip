@@ -3,25 +3,25 @@ export const CATEGORIES = [
     name: "Refrigerators",
     icon: "snowflake",
     color: "#e91e63",
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_8-300x300.jpg',
+    image: 'https://images.pexels.com/photos/6311475/pexels-photo-6311475.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     name: "Dishwashers",
     icon: "disc",
     color: "#9c27b0",
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_6-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/4099345/pexels-photo-4099345.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     name: "Ovens",
     icon: "flame",
     color: "#4CAF50",
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_7-300x300.jpg',
+    image: 'https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     name: "Washing Machines",
     icon: "water",
     color: "#2196F3",
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/6587900/pexels-photo-6587900.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
 ];
 
@@ -35,7 +35,7 @@ export const PRODUCTS = [
     rating: 4.8,
     reviewCount: 132,
     discountPercentage: 25,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/8992923/pexels-photo-8992923.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '2',
@@ -45,7 +45,7 @@ export const PRODUCTS = [
     price: 800,
     rating: 4.6,
     reviewCount: 98,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/4099345/pexels-photo-4099345.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '3',
@@ -55,7 +55,7 @@ export const PRODUCTS = [
     price: 950,
     rating: 4.9,
     reviewCount: 210,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/2986011/pexels-photo-2986011.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '4',
@@ -66,7 +66,7 @@ export const PRODUCTS = [
     rating: 4.7,
     reviewCount: 154,
     discountPercentage: 15,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/3993453/pexels-photo-3993453.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '5',
@@ -76,7 +76,7 @@ export const PRODUCTS = [
     price: 600,
     rating: 4.5,
     reviewCount: 75,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/247968/pexels-photo-247968.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '6',
@@ -86,7 +86,7 @@ export const PRODUCTS = [
     price: 650,
     rating: 4.4,
     reviewCount: 68,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/6207293/pexels-photo-6207293.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '7',
@@ -97,7 +97,7 @@ export const PRODUCTS = [
     rating: 4.9,
     reviewCount: 198,
     discountPercentage: 10,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/6311652/pexels-photo-6311652.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '8',
@@ -107,7 +107,7 @@ export const PRODUCTS = [
     price: 850,
     rating: 4.6,
     reviewCount: 112,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/6587900/pexels-photo-6587900.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '9',
@@ -117,7 +117,7 @@ export const PRODUCTS = [
     price: 450,
     rating: 4.7,
     reviewCount: 88,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/5591663/pexels-photo-5591663.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '10',
@@ -127,6 +127,6 @@ export const PRODUCTS = [
     price: 400,
     rating: 4.3,
     reviewCount: 54,
-    image: 'https://nidripcentralelectronics.co.uk/wp-content/uploads/2025/09/s-l1600_5-1-300x300.jpg',
+    image: 'https://images.pexels.com/photos/4099344/pexels-photo-4099344.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
 ];
